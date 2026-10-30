@@ -208,11 +208,13 @@ details.info .body { padding: 0 18px 18px; display: grid; gap: 10px; }
 .stickybar .btn { max-width: 528px; }
 
 .video { position: relative; width: 100%; max-width: 100%; aspect-ratio: 16/9; overflow: hidden; background: #000 center/cover no-repeat; }
-.video button.vplay { position: absolute; inset: 0; width: 100%; border: 0; background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.45)); display: grid; place-items: center; color: #fff; padding: 0; }
-.video .pbtn { width: 70px; height: 70px; border-radius: 50%; background: var(--go); display: grid; place-items: center; box-shadow: 0 6px 24px rgba(0,0,0,.4); }
-.video .pbtn svg { width: 30px; height: 30px; margin-left: 4px; }
-.video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-.video.rounded { border-radius: 16px; }
+.video video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.video.noclip { background: linear-gradient(140deg, #232831, #14171C); display: grid; place-content: center; justify-items: center; gap: 6px; text-align: center; color: var(--muted); }
+.video.noclip svg { width: 40px; height: 40px; color: var(--go); }
+.video.noclip b { color: var(--ink); font-family: var(--font-display); font-size: 22px; text-transform: uppercase; }
+.ph-grad { background: linear-gradient(140deg, #2A2F37, #16191E) !important; }
+.clipnote { background: var(--surface); border-left: 3px solid var(--go); border-radius: 10px; padding: 10px 12px; font-size: 14px; color: var(--muted); }
+.clipnote b { color: var(--ink); }
 .vmeta { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; color: var(--muted); flex-wrap: wrap; }
 .vmeta a { color: var(--ink); font-weight: 700; text-decoration: none; }
 .seg { display: grid; grid-template-columns: repeat(3, 1fr); background: var(--surface); border-radius: 999px; padding: 4px; }
@@ -394,12 +396,12 @@ input[type="range"] { width: 100%; accent-color: var(--go); height: 34px; }
   <!-- ÜBUNGEN -->
   <section class="view" id="v-uebungen" hidden aria-labelledby="h-ueb">
     <div class="hello">
-      <p class="eyebrow">8 Übungen mit Video</p>
+      <p class="eyebrow">8 Übungen · Anleitung &amp; Video</p>
       <h1 id="h-ueb">Übungen</h1>
     </div>
     <div class="chips" id="libFilter"></div>
     <div class="grid2" id="libGrid"></div>
-    <p class="muted" style="font-size:14px">Die Videos stammen von Physiotherapie-Praxen, Krankenkassen und Trainern auf YouTube. Der Kanal steht jeweils beim Video.</p>
+    <p class="muted" style="font-size:14px">Die Videos stammen von Pexels und dürfen frei genutzt werden. Für Aufstehen vom Stuhl und Beinheben im Sitzen folgt noch ein Video.</p>
   </section>
 
   <!-- VERLAUF -->
@@ -475,8 +477,7 @@ input[type="range"] { width: 100%; accent-color: var(--go); height: 34px; }
 const EX = {
   rudern: {
     name: 'Rudern mit Theraband', short: 'Rudern', area: 'ruecken', eq: ['Theraband', 'Tür'],
-    video: { id: '-6wr7i4kRtw', by: 'FitUndGesund.at' },
-    alt: { id: '4bRSe1v4q2Y', by: 'KURIER · Die Fitmacherinnen', label: 'Zweite Vorführung: im Sitzen' },
+    clip: { file: 'rudern', by: 'Kampus Production', note: 'Im Video sitzt er am Boden, das Band hängt an einem Baum. Die Zugbewegung ist dieselbe wie bei dir an der Tür.' },
     how: ['Band auf Brusthöhe in der geschlossenen Tür einklemmen oder um die Klinke legen.',
           'Einen Schritt zurück, bis das Band leicht gespannt ist.',
           'Ellbogen eng am Körper nach hinten ziehen, Schulterblätter zusammendrücken.',
@@ -490,8 +491,7 @@ const EX = {
   },
   wandengel: {
     name: 'Wandengel', short: 'Wandengel', area: 'ruecken', eq: ['Wand'],
-    video: { id: '1dB8rKGi2G0', by: 'Coach Doro' },
-    alt: { id: '1UU4VvklQ44', by: 'Vive Health (englisch)', label: 'Zweite Vorführung mit Physiotherapeut' },
+    clip: { file: 'wandengel', by: 'Ketut Subiyanto', note: 'Im Video steht sie vor der Wand. Bei dir lehnt der Rücken an der Wand und die Arme bilden ein „W“.' },
     how: ['Mit dem Rücken an die Wand stellen, Füße etwa eine Fußlänge vor der Wand, Knie leicht gebeugt.',
           'Arme im „W“ an die Wand legen.',
           'Langsam nach oben schieben und wieder zurück.'],
@@ -504,8 +504,7 @@ const EX = {
   },
   katze: {
     name: 'Katze-Kuh', short: 'Katze-Kuh', area: 'ruecken', eq: ['Matte', 'Kissen'],
-    video: { id: 'WRQ7r-FjnFQ', by: 'Physiozentrum' },
-    alt: { id: 'Ij3SwVioMr8', by: 'vitalius care', label: 'Knieschonend: im Sitzen' },
+    clip: { file: 'katze', by: 'Mikhail Nilov' },
     how: ['Vierfüßlerstand auf einer Matte, wegen der Knie ein Kissen unterlegen.',
           'Beim Ausatmen den Rücken rund machen, Kinn zur Brust.',
           'Beim Einatmen den Rücken sanft durchhängen lassen, Blick leicht nach vorn.'],
@@ -518,8 +517,7 @@ const EX = {
   },
   brust: {
     name: 'Brustdehnung im Türrahmen', short: 'Brustdehnung', area: 'ruecken', eq: ['Türrahmen'], hold: true,
-    video: { id: 'eloRP0aHvg0', by: 'behandeln.de' },
-    alt: { id: 'F4sI6VSl0Ww', by: 'iam_julian_mai', label: 'Zweite Vorführung im Türrahmen' },
+    clip: { file: 'brust', by: 'Ketut Subiyanto', note: 'Im Video ist der Arm gestreckt. Bei dir liegt der Unterarm am Türrahmen, Ellbogen auf Schulterhöhe.' },
     how: ['Unterarm hochkant an den Türrahmen, Ellbogen auf Schulterhöhe.',
           'Mit einem kleinen Schritt nach vorn lehnen, bis es vorn an der Brust sanft zieht.',
           'Halten, dann Seite wechseln.'],
@@ -531,8 +529,7 @@ const EX = {
   },
   aufstehen: {
     name: 'Aufstehen vom Stuhl', short: 'Aufstehen', area: 'knie', eq: ['Stuhl'],
-    video: { id: 'WmnivBUWJ4A', by: 'Rheumaliga Schweiz' },
-    alt: { id: 'wYm766k5xoI', by: 'Fit and Fun', label: 'Zweite Vorführung: Stuhl-Kniebeuge' },
+    clip: null,
     how: ['Auf die vordere Hälfte eines stabilen Stuhls setzen, Füße hüftbreit, Arme vor der Brust verschränkt.',
           'Oberkörper leicht nach vorn neigen und ohne Schwung aufstehen.',
           'Langsam, in etwa 3 Sekunden, wieder hinsetzen.'],
@@ -544,8 +541,7 @@ const EX = {
   },
   becken: {
     name: 'Beckenheben', short: 'Beckenheben', area: 'knie', eq: ['Matte'],
-    video: { id: 'Frl3QaFCVu8', by: 'AOK – Der Gesundheitskanal' },
-    alt: { id: '5ZLXS13PjvU', by: 'Physiozentrum', label: 'Zweite Vorführung' },
+    clip: { file: 'becken', by: 'Polina Tankilevitch', note: 'Das Band um die Knie ist die schwerere Variante. Am Anfang ohne Band.' },
     how: ['Auf den Rücken legen, Knie aufgestellt, Füße nah am Po, Arme neben dem Körper.',
           'Po anspannen und anheben, bis Schultern, Hüfte und Knie eine Linie bilden.',
           'Oben 2 Sekunden halten, langsam absenken.'],
@@ -557,8 +553,7 @@ const EX = {
   },
   beinSitz: {
     name: 'Beinheben im Sitzen', short: 'Beinheben', area: 'knie', eq: ['Stuhl'], perSide: 'pro Bein',
-    video: { id: 'gp6iGCEhgcg', by: 'Hilfe bei Arthrose', start: 42, hint: 'ab 0:42 „Bein-Strecker“' },
-    alt: { id: '8acNtF8xfG8', by: 'ARUNDIO-Training', label: 'Knie-Übungen im Sitzen zum Mitmachen' },
+    clip: null,
     how: ['Aufrecht auf einem Stuhl sitzen, Hände seitlich an der Sitzfläche.',
           'Ein Bein langsam strecken, Zehen zu dir ziehen, Oberschenkel anspannen.',
           '3 Sekunden halten, langsam absenken.'],
@@ -570,8 +565,7 @@ const EX = {
   },
   seitlich: {
     name: 'Seitliches Beinheben', short: 'Seitlich heben', area: 'knie', eq: ['Matte'], perSide: 'pro Seite',
-    video: { id: 'fqYDFzesYfI', by: 'larasch.de' },
-    alt: { id: 'wnPETxNuXsM', by: 'Mobility Doc (englisch)', label: 'Physiotherapeut zeigt den häufigsten Fehler' },
+    clip: { file: 'seitlich', by: 'SHVETS production', note: 'Im Video geht das Bein höher als nötig. Für dich reichen 30–40 cm.' },
     how: ['Auf die Seite legen, Kopf auf dem unteren Arm, unteres Bein gestreckt oder für mehr Halt leicht angewinkelt.',
           'Oberes Bein gestreckt langsam etwa 30–40 cm anheben, kurz halten, absenken.',
           'Dann Seite wechseln.'],
@@ -604,10 +598,10 @@ const BACK_ORDER = ['rudern', 'wandengel', 'katze', 'brust'];
 const DAY_NAMES = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
 const WEEK_PLAN = ['frei', 'kraft', 'ausdauer', 'kraft', 'ausdauer', 'kraft', 'lang']; // getDay(): 0 = Sonntag
 const SESSION = {
-  kraft: { title: 'Rücken + Knie', tag: 'Kraft', min: 32, eq: ['Theraband', 'Stuhl', 'Matte'], art: ['rudern', 'aufstehen', 'wandengel', 'brust'] },
-  ausdauer: { title: 'Ausdauer + Rücken', tag: 'Cardio', min: 35, eq: ['Theraband', 'Matte'], art: ['wandengel', 'brust', 'rudern', 'aufstehen'] },
-  ruecken: { title: 'Rücken in 10 Minuten', tag: 'Kurz', min: 10, eq: ['Theraband', 'Matte'], art: ['brust', 'wandengel', 'aufstehen', 'rudern'] },
-  lang: { title: 'Lange Ausdauer', tag: 'Cardio', min: 50, eq: ['Rad oder Schwimmbad'], art: ['aufstehen', 'rudern', 'brust', 'wandengel'] },
+  kraft: { title: 'Rücken + Knie', tag: 'Kraft', min: 32, eq: ['Theraband', 'Stuhl', 'Matte'], art: ['rudern', 'becken', 'seitlich', 'katze'] },
+  ausdauer: { title: 'Ausdauer + Rücken', tag: 'Cardio', min: 35, eq: ['Theraband', 'Matte'], art: ['katze', 'rudern', 'brust', 'wandengel'] },
+  ruecken: { title: 'Rücken in 10 Minuten', tag: 'Kurz', min: 10, eq: ['Theraband', 'Matte'], art: ['wandengel', 'katze', 'rudern', 'brust'] },
+  lang: { title: 'Lange Ausdauer', tag: 'Cardio', min: 50, eq: ['Rad oder Schwimmbad'], art: ['seitlich', 'becken', 'brust', 'rudern'] },
   frei: { title: 'Ruhetag', tag: 'Erholung', min: 0, eq: [], art: [] }
 };
 
@@ -632,8 +626,9 @@ const de = n => String(n).replace('.', ',');
 /* ================= Hilfen ================= */
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-const thumb = (k, q = 'mqdefault') => `https://i.ytimg.com/vi/${EX[k].video.id}/${q}.jpg`;
-const mosaic = keys => `<div class="mosaic">${keys.map(k => `<span style="background-image:url('${thumb(k)}')"></span>`).join('')}</div>`;
+const thumb = k => (EX[k].clip ? `clips/${EX[k].clip.file}.jpg` : null);
+const bg = k => (thumb(k) ? `style="background-image:url('${thumb(k)}')"` : 'class="ph-grad"');
+const mosaic = keys => `<div class="mosaic">${keys.map(k => `<span ${bg(k)}></span>`).join('')}</div>`;
 const ICON = {
   play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>',
   pause: '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4.5" width="4" height="15" rx="1"/><rect x="14" y="4.5" width="4" height="15" rx="1"/></svg>',
@@ -675,29 +670,16 @@ async function keepAwake(on) {
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && W) keepAwake(true); });
 
 /* ================= Video ================= */
-function embedSrc(v, muted) {
-  const p = new URLSearchParams({ autoplay: '1', playsinline: '1', rel: '0', modestbranding: '1' });
-  if (v.start) p.set('start', v.start);
-  if (muted) { p.set('mute', '1'); p.set('loop', '1'); p.set('playlist', v.id); }
-  return `https://www.youtube-nocookie.com/embed/${v.id}?${p}`;
+// Eigene Clips: stumm, in Schleife, direkt in der App (keine fremden Player)
+function clipHTML(ex, cls = '') {
+  if (!ex.clip) return `<div class="video noclip ${cls}">${ICON.bolt}<b>Video folgt</b><span>Die Anleitung steht unten.</span></div>`;
+  const f = ex.clip.file;
+  return `<div class="video ${cls}" style="background-image:url('clips/${f}.jpg')"><video src="clips/${f}.mp4" poster="clips/${f}.jpg" autoplay muted loop playsinline preload="auto" aria-label="${esc(ex.name)} im Video"></video></div>`;
 }
-function iframeHTML(v, muted) {
-  return `<iframe src="${embedSrc(v, muted)}" title="Übungsvideo" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+function clipNoteHTML(ex) {
+  if (!ex.clip) return '';
+  return `${ex.clip.note ? `<p class="clipnote"><b>Hinweis:</b> ${esc(ex.clip.note)}</p>` : ''}<div class="vmeta"><span>Video: ${esc(ex.clip.by)} · Pexels</span></div>`;
 }
-function facadeHTML(v, label, cls = '') {
-  return `<div class="video ${cls}" style="background-image:url('https://i.ytimg.com/vi/${v.id}/hqdefault.jpg')">
-      <button class="vplay" type="button" data-yt="${v.id}" data-ytstart="${v.start || ''}" aria-label="Video abspielen: ${esc(label)}"><span class="pbtn">${ICON.play}</span></button>
-    </div>`;
-}
-function vmetaHTML(v) {
-  const watch = `https://www.youtube.com/watch?v=${v.id}${v.start ? `&t=${v.start}s` : ''}`;
-  return `<div class="vmeta"><span>Video: ${esc(v.by)}${v.hint ? ' · ' + esc(v.hint) : ''}</span><a href="${watch}" target="_blank" rel="noopener">In YouTube öffnen ↗</a></div>`;
-}
-document.addEventListener('click', e => {
-  const b = e.target.closest('button[data-yt]');
-  if (!b) return;
-  b.outerHTML = iframeHTML({ id: b.dataset.yt, start: b.dataset.ytstart }, false);
-});
 
 /* ================= Zielwerte ================= */
 function target(key, phase, mode) {
@@ -729,7 +711,8 @@ function stepSub(s) {
   return targetText(s.t) + (s.t.note ? ' · ' + s.t.note : '');
 }
 function stepThumb(s, cls = 'img') {
-  if (s.type === 'ex') return `<span class="${cls}" style="background-image:url('${thumb(s.key, 'mqdefault')}')"></span>`;
+  if (s.type === 'ex' && thumb(s.key)) return `<span class="${cls}" style="background-image:url('${thumb(s.key)}')"></span>`;
+  if (s.type === 'ex') return `<span class="ph">${ICON.bolt}</span>`;
   return `<span class="ph">${s.type === 'cardio' ? ICON.heart : ICON.bolt}</span>`;
 }
 function sessionMinutes(kind, phase) {
@@ -852,7 +835,7 @@ function renderUebungen() {
   $('#libGrid').innerHTML = Object.keys(EX).filter(k => libFilter === 'alle' || EX[k].area === libFilter).map(k => {
     const ex = EX[k];
     return `<button class="tile" type="button" data-ex="${k}">
-      <span class="img" style="background-image:url('${thumb(k)}')"></span><span class="shade"></span>
+      <span class="img ${thumb(k) ? '' : 'ph-grad'}" ${thumb(k) ? `style="background-image:url('${thumb(k)}')"` : ''}></span><span class="shade"></span>
       <span class="pill">${ex.area === 'knie' ? 'Knie' : 'Rücken'}</span>
       <span class="over"><h3>${esc(ex.short)}</h3><span class="t num">${esc(targetText(target(k, ph, 'kraft')))}</span></span>
     </button>`;
@@ -876,11 +859,11 @@ function openExercise(k) {
   openLayer('sheet2', `
     <div style="position:relative;max-width:560px;margin:0 auto">
       <div style="height:env(safe-area-inset-top, 0px);background:#000"></div>
-      ${facadeHTML(ex.video, ex.name)}
+      ${clipHTML(ex)}
       <div class="floattop" style="top:calc(env(safe-area-inset-top, 0px) + 10px)"><button class="iconbtn" type="button" data-close="sheet2" aria-label="Zurück">${ICON.back}</button></div>
     </div>
     <div class="pad" style="padding-top:12px">
-      ${vmetaHTML(ex.video)}
+      ${clipNoteHTML(ex)}
       <div class="stack" style="display:grid;gap:10px">
         <div class="chips"><span class="pill go">${ex.area === 'knie' ? 'Knie' : 'Oberer Rücken'}</span>${ex.eq.map(x => `<span class="pill dark">${esc(x)}</span>`).join('')}</div>
         <h1>${esc(ex.name)}</h1>
@@ -896,11 +879,6 @@ function openExercise(k) {
       <div data-pane="plan" class="sec" hidden>
         <table class="plan"><thead><tr><th>Woche</th><th>Sätze × Wiederholungen</th></tr></thead><tbody>${planRows}</tbody></table>
         ${ex.back ? `<p class="muted">An Tagen ohne Krafttraining: ${esc(targetText({ ...ex.back, perSide: ps }))}.</p>` : '<p class="muted">Nur an Krafttagen: Montag, Mittwoch, Freitag.</p>'}
-      </div>
-      <div class="sec">
-        <h3>${esc(ex.alt.label)}</h3>
-        ${facadeHTML(ex.alt, ex.alt.label, 'rounded')}
-        ${vmetaHTML(ex.alt)}
       </div>
     </div>`);
 }
@@ -941,9 +919,9 @@ function renderMedia(st) {
   W.mediaKey = key;
   if (st.type === 'ex') {
     // Video läuft stumm in Schleife, wie eine Demo; Ton per Tipp ins Video
-    $('#pMedia').innerHTML = `<div class="video">${iframeHTML(EX[st.key].video, true)}</div>`;
+    $('#pMedia').innerHTML = clipHTML(EX[st.key]);
   } else {
-    const keys = st.type === 'cardio' ? ['aufstehen', 'rudern', 'brust', 'wandengel'] : ['wandengel', 'rudern', 'brust', 'aufstehen'];
+    const keys = st.type === 'cardio' ? ['seitlich', 'becken', 'rudern', 'katze'] : ['wandengel', 'rudern', 'brust', 'katze'];
     $('#pMedia').innerHTML = `<div class="art" style="position:relative">${mosaic(keys).replace('class="mosaic"', 'class="mosaic" style="position:absolute;inset:0;filter:saturate(.6) brightness(.7)"')}<span class="shade"></span><span class="pill go" style="position:relative">${st.type === 'cardio' ? 'Ausdauer' : 'Aufwärmen'}</span></div>`;
   }
 }
@@ -989,7 +967,7 @@ function setDone() {
 function setDots(st) { return `<div class="setdots" aria-label="Satz ${W.set + 1} von ${st.t.s}">${Array.from({ length: st.t.s }, (_, i) => `<i class="${i < W.set ? 'done' : i === W.set ? 'now' : ''}"></i>`).join('')}</div>`; }
 function tipsHTML(k) {
   const ex = EX[k];
-  return `<details class="info"><summary>So geht's richtig</summary><div class="body">${howHTML(ex)}${variHTML(ex)}</div></details>`;
+  return `<details class="info" ${ex.clip ? '' : 'open'}><summary>So geht's richtig</summary><div class="body">${howHTML(ex)}${variHTML(ex)}</div></details>`;
 }
 function bindNav() {
   const p = $('#wPrev'); if (p) p.onclick = () => { clearTick(); prevStep(); };
@@ -1004,7 +982,7 @@ function renderReps(st) {
   const sides = ex.perSide ? 2 : 1;
   $('#pBody').innerHTML = `
     <div class="pname"><p class="eyebrow">Satz ${W.set + 1} von ${st.t.s}${st.t.note ? ' · ' + esc(st.t.note) : ''}</p><h1>${esc(ex.name)}</h1></div>
-    ${vmetaHTML(ex.video)}
+    ${clipNoteHTML(ex)}
     <div class="counter"><div><span class="big">${st.t.r}</span><span class="unit"> Wdh.${ex.perSide ? ' ' + ex.perSide : ''}</span></div>${setDots(st)}</div>
     <div class="coach" aria-live="polite">
       <div class="phase" id="cPhase">Tempo-Coach</div>
@@ -1053,7 +1031,7 @@ function renderHold(st) {
   const sideName = W.side === 0 ? 'Linke Seite' : 'Rechte Seite';
   $('#pBody').innerHTML = `
     <div class="pname"><p class="eyebrow">Satz ${W.set + 1} von ${st.t.s} · ${sideName}</p><h1>${esc(ex.name)}</h1></div>
-    ${vmetaHTML(ex.video)}
+    ${clipNoteHTML(ex)}
     <div class="ring"><svg viewBox="0 0 230 230"><circle class="trk" cx="115" cy="115" r="100"/><circle class="val" id="hVal" cx="115" cy="115" r="100" stroke-dasharray="628.3" stroke-dashoffset="0"/></svg>
       <div class="lbl"><b id="hNum">${sec}</b><span>Sekunden</span></div></div>
     <div class="controls">
